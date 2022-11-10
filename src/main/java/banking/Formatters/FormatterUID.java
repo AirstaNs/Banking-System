@@ -1,7 +1,7 @@
-package banking.Formatted;
+package banking.Formatters;
 
 
-public class FormattedFourChar implements Formatted {
+public class FormatterUID implements Formatter {
     @Override
     public  String castToFormat(int value) {
         return String.format("%04d", value);
