@@ -11,6 +11,8 @@ public class CreateCard implements ShouldBeGenerateCardNumber {
 
     @Override
     public String generated(int UserId) {
-        return null;
+        final int ControlSum = 9; //TODO БИЛДЕР
+       String accountIdentifier = format.castToFormat(UserId);
+      return String.format("%s%s%d",BIN,accountIdentifier,ControlSum);
     }
 }
