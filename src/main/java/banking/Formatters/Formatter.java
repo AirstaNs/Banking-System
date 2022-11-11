@@ -1,6 +1,8 @@
 package banking.Formatters;
 
-public interface Formatter {
+public interface Formatter<T> {
     //TODO FACTORY
-    String castToFormat(int value);
+    String toFormat(T value);
 }
+
+

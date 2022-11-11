@@ -1,9 +1,10 @@
 package banking.Formatters;
 
 
-public class FormatterPin implements Formatter {
+public class FormatterPin implements FormatterInt {
+
     @Override
-    public  String castToFormat(int value) {
+    public String toFormat(Integer value) {
         return String.format("%04d", value);
     }
 }
