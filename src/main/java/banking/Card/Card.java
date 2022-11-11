@@ -1,30 +1,39 @@
 package banking.Card;
 
-import banking.Formatters.Formatter;
+import banking.Formatters.FormatterInt;
+import client.UID;
+
 
 import static banking.Card.ShouldBeGenerateCardNumber.BIN;
 
 public class Card   {
     private final String number;
-    private final Formatter format;
 
-    private final String Pin;
 
-    public Card(Formatter formatCard, Formatter formatPin, int UserId) {
-        this.format = formatCard;
-        this.number = create(UserId);
-        this.Pin = new Pin(formatPin).getPin();
+    private final Pin pin;
+
+    public Card(FormatterInt formatPin, UID UserID) {
+        String stringFormatUID = UserID.getFormattedID();
+        this.number = create(stringFormatUID);
+        this.pin = new Pin(formatPin);
     }
 
-   private   String create(int UserId) {
+   private   String create(String ID) {
         final int ControlSum = 9; //TODO БИЛДЕР
-       String accountIdentifier = format.castToFormat(UserId);
 
-       return String.format("%s%s%d",BIN,accountIdentifier,ControlSum);
+       return String.format("%s%s%d",BIN,ID,ControlSum);
     }
 
     public String getNumber() {
         return number;
     }
 
+    @Override
+    public String toString() {
+      return   String.format("""
+                        Your card number:
+                        %s
+                        %s
+                        """,number,pin);
+    }
 }
