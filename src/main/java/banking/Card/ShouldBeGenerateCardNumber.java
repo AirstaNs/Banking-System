@@ -1,6 +1,6 @@
 package banking.Card;
 
-public interface ShouldBeGenerateCardNumber {
+ interface ShouldBeGenerateCardNumber {
     String BIN = "400000";
     int lengthCARD = 16 - BIN.length();
 
