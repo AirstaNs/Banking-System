@@ -1,7 +1,7 @@
 package banking.Card;
 
 import banking.Formatters.FormatterInt;
-import client.UID;
+import banking.client.UID;
 
 
 import java.util.Objects;

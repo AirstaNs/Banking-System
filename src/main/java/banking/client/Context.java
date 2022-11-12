@@ -1,4 +1,4 @@
-package client;
+package banking.client;
 
 import banking.Card.Card;
 
