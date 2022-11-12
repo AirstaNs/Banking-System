@@ -1,0 +1,16 @@
+package UserInterface.Strategy;
+
+import UserInterface.Commands.Command;
+
+public class Context {
+    private Strategy strategy;
+
+    public void setStrategy(Strategy strategy) {
+         this.strategy = strategy;
+    }
+
+
+    public Command executeStrategy(int operation) {
+        return strategy.execute(operation);
+    }
+}
