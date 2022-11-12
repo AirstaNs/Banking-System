@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class User {
     private final UID ID;
-    private HashMap<Card, Pin> req;
+  //  private HashMap<Card, Pin> req;
     private final Card card;
 
     public User() {
@@ -38,6 +38,7 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
+        if (this.hashCode()!=o.hashCode()) return false;
         User user = (User) o;
         return ID.equals(user.ID);
     }
