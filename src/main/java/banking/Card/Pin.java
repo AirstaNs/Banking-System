@@ -3,6 +3,7 @@ package banking.Card;
 import banking.Formatters.FormatterInt;
 import banking.RandomGenerate.GenerateSecureRandomInt;
 
+import java.util.Formatter;
 import java.util.StringJoiner;
 
 public class Pin {
@@ -32,5 +33,20 @@ public class Pin {
     @Override
     public String toString() {
         return String.format("Your card PIN:%n%s",pin);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pin)) return false;
+
+        Pin pin1 = (Pin) o;
+
+        return pin.equals(pin1.pin);
+    }
+
+    @Override
+    public int hashCode() {
+        return pin.hashCode();
     }
 }

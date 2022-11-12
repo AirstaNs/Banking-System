@@ -4,11 +4,12 @@ import banking.Formatters.FormatterInt;
 import client.UID;
 
 
+import java.util.Objects;
+
 import static banking.Card.ShouldBeGenerateCardNumber.BIN;
 
-public class Card   {
+public class Card {
     private final String number;
-
 
     private final Pin pin;
 
@@ -18,10 +19,10 @@ public class Card   {
         this.pin = new Pin(formatPin);
     }
 
-   private   String create(String ID) {
+    private String create(String ID) {
         final int ControlSum = 9; //TODO БИЛДЕР
 
-       return String.format("%s%s%d",BIN,ID,ControlSum);
+        return String.format("%s%s%d", BIN, ID, ControlSum);
     }
 
     public String getNumber() {
@@ -30,10 +31,23 @@ public class Card   {
 
     @Override
     public String toString() {
-      return   String.format("""
-                        Your card number:
-                        %s
-                        %s
-                        """,number,pin);
+        return String.format("""
+                Your card number:
+                %s
+                %s
+                """, number, pin);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Card)) return false;
+        Card card = (Card) o;
+        return number.equals(card.number) && pin.equals(card.pin);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, pin);
     }
 }

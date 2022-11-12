@@ -2,15 +2,16 @@ package client;
 
 
 import banking.Formatters.FormatterInt;
-import banking.Formatters.FormatterUID;
+import banking.Formatters.UIDFormat;
 
+import java.util.Objects;
 
 
 public class UID { //FIXME -> default package
 
     private static int count = 0;
     private final int ID;
-    private FormatterInt formatter = new FormatterUID();
+    private FormatterInt formatter = new UIDFormat();
 
     public UID() {
         ID =  increaseID();
@@ -29,13 +30,26 @@ public class UID { //FIXME -> default package
     public  String getFormattedID(){
         return formatter.toFormat(count);
     }
-    public void setFormatter(FormatterUID formatter){
+    public void setFormatter(FormatterInt formatter){
         this.formatter = formatter;
     }
 
     @Override
     public String toString() {
         return getFormattedID();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UID)) return false;
+        UID uid = (UID) o;
+        return ID == uid.ID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
     }
 }
 //    public static void main(String[] args) {
