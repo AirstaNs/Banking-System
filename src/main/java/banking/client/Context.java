@@ -6,7 +6,13 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class Context {
-    private final ArrayList<User> Users = new ArrayList<>();
+    private static final Context Instance = new Context();
+
+    private Context() {
+
+    }
+
+    private static final ArrayList<User> Users = new ArrayList<>();
 
     public void addUser(User user) {
         var userOptional = Optional.ofNullable(user);
@@ -27,10 +33,9 @@ public class Context {
         return Users.remove(user);
     }
 
-    public static void main(String[] args) {
-        var cont = new Context();
 
-        var USER = new User();
-        cont.addUser(USER);
+    public static Context getInstance() {
+        return Instance;
     }
+
 }
