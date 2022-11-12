@@ -1,7 +1,7 @@
 package banking.Formatters;
 
 
-public class FormatterPin implements FormatterInt {
+public class PinFormat implements FormatterInt {
 
     @Override
     public String toFormat(Integer value) {

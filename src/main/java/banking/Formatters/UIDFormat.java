@@ -1,6 +1,6 @@
 package banking.Formatters;
 
-public class FormatterUID implements FormatterInt {
+public class UIDFormat implements FormatterInt {
 
     @Override
     public String toFormat(Integer value) {
