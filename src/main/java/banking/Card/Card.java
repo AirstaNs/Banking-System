@@ -11,12 +11,19 @@ import static banking.Card.ShouldBeGenerateCardNumber.BIN;
 public class Card {
     private final String number;
 
-    private final Pin pin;
+    private final Pin PIN;
+
+    private Balance balance;
 
     public Card(FormatterInt formatPin, UID UserID) {
         String stringFormatUID = UserID.getFormattedID();
         this.number = create(stringFormatUID);
-        this.pin = new Pin(formatPin);
+        this.PIN = new Pin(formatPin);
+        this.balance = new Balance(this);
+    }
+    public Card(String number, String PIN) {
+        this.number = number;
+        this.PIN = new Pin(PIN);
     }
 
     private String create(String ID) {
@@ -29,25 +36,33 @@ public class Card {
         return number;
     }
 
+
+    public Balance getBalance() {
+        return balance;
+    }
+
     @Override
     public String toString() {
         return String.format("""
                 Your card number:
                 %s
                 %s
-                """, number, pin);
+                """, number, PIN);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Card)) return false;
+        if (this.hashCode()!=o.hashCode()) return false;
+
         Card card = (Card) o;
-        return number.equals(card.number) && pin.equals(card.pin);
+        return number.equals(card.number) && PIN.equals(card.PIN);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number, pin);
+        return Objects.hash(number, PIN);
+
     }
 }
