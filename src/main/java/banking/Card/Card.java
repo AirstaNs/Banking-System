@@ -6,7 +6,7 @@ import banking.client.UID;
 
 import java.util.Objects;
 
-import static banking.Card.ShouldBeGenerateCardNumber.BIN;
+import static banking.Card.CardFormat.BIN;
 
 /**
  * A class that describes the Card of a specific client.
@@ -58,9 +58,12 @@ public class Card {
      * @return card number in the required format
      */
     private String create(String ID) {
-        final int ControlSum = 9; //TODO БИЛДЕР
-
-        return String.format("%s%s%d", BIN, ID, ControlSum);
+        StringBuilder builder = new StringBuilder();
+        builder.append(BIN)
+               .append(ID);
+        final String ControlSum = AlgorithmLuna.getLastNumberCardFormatLuna(builder.toString());
+        builder.append(ControlSum);
+        return builder.toString();
     }
 
     public String getNumber() {
