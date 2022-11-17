@@ -1,10 +1,10 @@
 package banking.TestCommand.Recivers;
 
-import banking.TestCommand.HomeAutomationDemo;
+import banking.TestCommand.BankSystem;
 
 public interface ShouldBeExit {
      default void exit(){
          System.out.println("Bye!");
-         HomeAutomationDemo.isWork = false; //что-то с этим сделать
+         BankSystem.isWork = false; //что-то с этим сделать
      }
 }

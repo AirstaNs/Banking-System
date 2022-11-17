@@ -1,7 +1,7 @@
 package banking.TestCommand.Recivers;
 
 import banking.TestCommand.Controller;
-import banking.TestCommand.HomeAutomationDemo;
+import banking.TestCommand.BankSystem;
 import banking.TestCommand.Page;
 import banking.client.Context;
 import banking.client.User;
@@ -58,7 +58,7 @@ public class LoginMenu implements ShouldBeExit {
         user.ifPresentOrElse((person) -> {
             personalMenu.setUser(person);
             System.out.println("You have successfully logged in!");
-            controller.setPage(Page.personalPage(HomeAutomationDemo.personalMenu));
+            controller.setPage(Page.personalPage(BankSystem.personalMenu));
         }, () -> System.out.println("Wrong card number or PIN!"));
     }
 }

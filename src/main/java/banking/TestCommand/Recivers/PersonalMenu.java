@@ -1,7 +1,7 @@
 package banking.TestCommand.Recivers;
 
 import banking.TestCommand.Controller;
-import banking.TestCommand.HomeAutomationDemo;
+import banking.TestCommand.BankSystem;
 import banking.TestCommand.Page;
 import banking.client.User;
 
@@ -48,6 +48,6 @@ public class PersonalMenu implements ShouldBeExit {
     public void LogOut() {
         System.out.println("You have successfully logged out!\n");
         user = null;
-        controller.setPage(Page.welcomePage(HomeAutomationDemo.loginMenu, HomeAutomationDemo.personalMenu));
+        controller.setPage(Page.welcomePage(BankSystem.loginMenu, BankSystem.personalMenu));
     }
 }
