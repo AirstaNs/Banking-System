@@ -1,6 +1,6 @@
-package banking.TestCommand;
+package banking.MenuActions;
 
-import banking.TestCommand.Actions.Action;
+import banking.MenuActions.Actions.Action;
 
 import java.util.List;
 

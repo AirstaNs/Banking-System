@@ -1,4 +1,4 @@
-import banking.TestCommand.BankSystem;
+import banking.MenuActions.BankSystem;
 
 public class Main {
 

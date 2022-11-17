@@ -1,6 +1,6 @@
-package banking.TestCommand.Recivers;
+package banking.MenuActions.Recivers;
 
-import banking.TestCommand.BankSystem;
+import banking.MenuActions.BankSystem;
 
 public interface ShouldBeExit {
      default void exit(){

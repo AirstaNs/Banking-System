@@ -1,7 +1,7 @@
-package banking.TestCommand.Actions;
+package banking.MenuActions.Actions;
 
 
-import banking.TestCommand.Recivers.PersonalMenu;
+import banking.MenuActions.Recivers.PersonalMenu;
 
 public class Balance_Action extends Action {
 

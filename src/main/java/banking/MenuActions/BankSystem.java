@@ -1,8 +1,8 @@
-package banking.TestCommand;
+package banking.MenuActions;
 
 
-import banking.TestCommand.Recivers.LoginMenu;
-import banking.TestCommand.Recivers.PersonalMenu;
+import banking.MenuActions.Recivers.LoginMenu;
+import banking.MenuActions.Recivers.PersonalMenu;
 
 
 import java.util.Scanner;

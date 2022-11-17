@@ -1,8 +1,8 @@
-package banking.TestCommand;
+package banking.MenuActions;
 
-import banking.TestCommand.Actions.*;
-import banking.TestCommand.Recivers.LoginMenu;
-import banking.TestCommand.Recivers.PersonalMenu;
+import banking.MenuActions.Actions.*;
+import banking.MenuActions.Recivers.LoginMenu;
+import banking.MenuActions.Recivers.PersonalMenu;
 
 import java.util.ArrayList;
 import java.util.List;

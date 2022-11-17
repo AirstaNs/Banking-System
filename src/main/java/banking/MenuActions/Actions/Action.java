@@ -1,4 +1,4 @@
-package banking.TestCommand.Actions;
+package banking.MenuActions.Actions;
 
 // COMMAND
 public abstract class Action {

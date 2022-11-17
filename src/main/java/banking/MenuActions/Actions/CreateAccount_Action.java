@@ -1,6 +1,6 @@
-package banking.TestCommand.Actions;
+package banking.MenuActions.Actions;
 
-import banking.TestCommand.Recivers.LoginMenu;
+import banking.MenuActions.Recivers.LoginMenu;
 
 public class CreateAccount_Action extends Action {
     private static final String title = "Create an account";

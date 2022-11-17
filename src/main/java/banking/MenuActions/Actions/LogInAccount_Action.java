@@ -1,7 +1,7 @@
-package banking.TestCommand.Actions;
+package banking.MenuActions.Actions;
 
-import banking.TestCommand.Recivers.LoginMenu;
-import banking.TestCommand.Recivers.PersonalMenu;
+import banking.MenuActions.Recivers.LoginMenu;
+import banking.MenuActions.Recivers.PersonalMenu;
 
 public class LogInAccount_Action extends Action {
     private static final String title = "Log into account";

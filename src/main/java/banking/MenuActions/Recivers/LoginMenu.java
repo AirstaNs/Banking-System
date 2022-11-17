@@ -1,8 +1,8 @@
-package banking.TestCommand.Recivers;
+package banking.MenuActions.Recivers;
 
-import banking.TestCommand.Controller;
-import banking.TestCommand.BankSystem;
-import banking.TestCommand.Page;
+import banking.MenuActions.Controller;
+import banking.MenuActions.BankSystem;
+import banking.MenuActions.Page;
 import banking.client.Context;
 import banking.client.User;
 

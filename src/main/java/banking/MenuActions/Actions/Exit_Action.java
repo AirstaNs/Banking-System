@@ -1,6 +1,6 @@
-package banking.TestCommand.Actions;
+package banking.MenuActions.Actions;
 
-import banking.TestCommand.Recivers.ShouldBeExit;
+import banking.MenuActions.Recivers.ShouldBeExit;
 
 public class Exit_Action extends Action {
     private static final String title = "Exit";
