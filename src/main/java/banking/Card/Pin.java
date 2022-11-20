@@ -18,7 +18,8 @@ public class Pin {
     }
 
     private String create() {
-        int gen = GenerateSecureRandomInt.getInstance().generate(MAX_VALUE_PIN, MIN_VALUE_PIN);
+        int gen = GenerateSecureRandomInt.getInstance()
+                                         .generate(MAX_VALUE_PIN, MIN_VALUE_PIN);
         return formatPin.toFormat(gen);
     }
 
@@ -28,14 +29,18 @@ public class Pin {
 
     @Override
     public String toString() {
-        return String.format("Your card PIN:%n%s",pin);
+        return pin;
+    }
+
+    public void printConsole() {
+        System.out.printf("Your card PIN:%n%s", pin);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Pin)) return false;
-        if (this.hashCode()!=o.hashCode()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
 
         Pin pin1 = (Pin) o;
 
