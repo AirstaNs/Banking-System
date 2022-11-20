@@ -6,7 +6,7 @@ import banking.client.UID;
 
 import java.util.Objects;
 
-import static banking.Card.CardFormat.BIN;
+import static banking.Card.DebitCardFormat.BIN;
 
 /**
  * A class that describes the Card of a specific client.
@@ -61,7 +61,7 @@ public class Card {
         StringBuilder builder = new StringBuilder();
         builder.append(BIN)
                .append(ID);
-        final String ControlSum = AlgorithmLuna.getLastNumberCardFormatLuna(builder.toString());
+        final int ControlSum = new AlgorithmLuna(builder.toString()).getNextNumberCardFormatLuna();
         builder.append(ControlSum);
         return builder.toString();
     }
@@ -70,6 +70,9 @@ public class Card {
         return number;
     }
 
+    public Pin getPIN() {
+        return PIN;
+    }
 
     public Balance getBalance() {
         return Balance;
@@ -77,7 +80,11 @@ public class Card {
 
     @Override
     public String toString() {
-        return String.format("""
+        return number;
+    }
+
+    public void printConsole() {
+        System.out.printf("""
                 Your card number:
                 %s
                 %s
