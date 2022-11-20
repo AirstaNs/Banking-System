@@ -3,7 +3,7 @@ package banking.MenuActions.Recivers;
 import banking.MenuActions.Controller;
 import banking.MenuActions.BankSystem;
 import banking.MenuActions.Page;
-import banking.client.Context;
+import banking.client.ContextList;
 import banking.client.User;
 
 import java.util.Scanner;
@@ -33,8 +33,9 @@ public class LoginMenu implements ShouldBeExit {
      */
     public void createAccount() {
         var user = new User();
-        Context.getInstance().addUser(user);
-        System.out.println(user);
+        ContextList.getInstance()
+                   .addUser(user);
+        user.printToConsole();
     }
 
     /**
@@ -52,7 +53,8 @@ public class LoginMenu implements ShouldBeExit {
         var number = scanner.next();
         System.out.println("Enter your PIN:");
         var pin = scanner.next();
-        var user = Context.getInstance().getUser(number, pin);
+        var user = ContextList.getInstance()
+                              .getUser(number, pin);
 
         // TODO возможно связано с Context, вставлять брать из Context
         user.ifPresentOrElse((person) -> {
