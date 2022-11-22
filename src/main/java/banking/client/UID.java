@@ -14,7 +14,12 @@ public class UID { //FIXME -> default package
     private FormatterInt formatter = new UIDFormat();
 
     public UID() {
-        ID =  increaseID();
+        ID = increaseID();
+
+    }
+
+    public UID(int id) {
+        ID = id;
 
     }
 
@@ -23,8 +28,7 @@ public class UID { //FIXME -> default package
     }
 
 
-
-    public  int getID() {
+    public int getID() {
         return ID;
     }
     public  String getFormattedID(){
