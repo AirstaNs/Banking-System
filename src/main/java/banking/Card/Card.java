@@ -78,6 +78,10 @@ public class Card {
         return Balance;
     }
 
+    public void setBalance(Balance balance) {
+        Balance = balance;
+    }
+
     @Override
     public String toString() {
         return number;
