@@ -1,5 +1,6 @@
 package banking.client;
 
+import banking.Card.Balance;
 import banking.Card.Card;
 
 import banking.Formatters.PinFormat;
@@ -10,9 +11,18 @@ public class User {
     private final UID ID;
     private final Card card;
 
+
     public User() {
         ID = new UID();
         card = new Card(new PinFormat(), ID);//.generated(id);
+    }
+
+    public User(int id, String card_number, String pin, int balance) {
+        ID = new UID(id);
+        card = new Card(card_number, pin);//.generated(id);
+        card.setBalance(new Balance(card));
+        card.getBalance()
+            .deposit((long) balance);
     }
 
     public void printToConsole() {
@@ -26,6 +36,10 @@ public class User {
 
     public Card getCard() {
         return card;
+    }
+
+    public UID getID() {
+        return ID;
     }
 
     @Override
