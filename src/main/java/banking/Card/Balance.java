@@ -27,7 +27,7 @@ public class Balance {
      *
      * @param amount the value by which to increase the balance.
      */
-    protected void deposit(Long amount) {
+    public void deposit(Long amount) {
         this.balance += amount;
     }
 
@@ -36,11 +36,11 @@ public class Balance {
      *
      * @param amount the value by which to reduce the balance.
      */
-    protected void withdraw(Long amount) {
+    public void withdraw(Long amount) {
         this.balance -= amount;
     }
 
-    protected long getBalance() {
+    public long getBalance() {
         return balance;
     }
 
