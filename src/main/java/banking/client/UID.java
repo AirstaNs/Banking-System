@@ -18,6 +18,10 @@ public class UID { //FIXME -> default package
 
     }
 
+    public static void setCount(int count) {
+        UID.count = count;
+    }
+
     public UID(int id) {
         ID = id;
 
