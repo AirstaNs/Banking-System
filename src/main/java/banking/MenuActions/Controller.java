@@ -1,5 +1,6 @@
 package banking.MenuActions;
 
+import banking.DAO.Context;
 import banking.MenuActions.Actions.Action;
 
 import java.util.List;
@@ -18,6 +19,12 @@ public class Controller {
     private List<Action> page; //FIXME PAGE
 
     //  private List<ShouldBeExit> views; TODO ДОРАБОТАТЬ
+
+    private Context context;
+
+    public Controller(Context context) {
+        this.context = context;
+    }
 
     /**
      * Sets the page that will then be printed to the console.
@@ -46,7 +53,13 @@ public class Controller {
         if (page == null) {
             throw new NullPointerException("No Actions");
         } else {
-            page.stream().map(Action::toString).forEach(System.out::println);
+            page.stream()
+                .map(Action::toString)
+                .forEach(System.out::println);
         }
+    }
+
+    public Context getContext() {
+        return context;
     }
 }
