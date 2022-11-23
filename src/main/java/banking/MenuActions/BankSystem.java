@@ -3,6 +3,7 @@ package banking.MenuActions;
 
 import banking.MenuActions.Recivers.LoginMenu;
 import banking.MenuActions.Recivers.PersonalMenu;
+import banking.DAO.ContextDataBase;
 
 
 import java.util.Scanner;
@@ -26,7 +27,7 @@ public class BankSystem {
     /**
      * The initialization page is available without logging in. A specific menu item and page
      */
-    public static final LoginMenu loginMenu = new LoginMenu(controller);
+    public static LoginMenu loginMenu;
 
     /**
      * The personal account page in the system is available after logging in.
@@ -37,8 +38,8 @@ public class BankSystem {
      * Launching the banking system, exposes the welcome page - loginMenu. <br>
      * Works as long as {@link BankSystem#isWork}  != false.
      */
-    public void start() {
-
+    public void start(String nameDB) {
+        loginMenu = new LoginMenu(controller, new ContextDataBase(nameDB));
         controller.setPage(Page.welcomePage(loginMenu, personalMenu));
 
         while (isWork) {
