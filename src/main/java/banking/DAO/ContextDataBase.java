@@ -20,7 +20,6 @@ public class ContextDataBase implements Context {
     }
 
     public void init() {
-        // boolean f =  dropTable(); /TODO
         boolean b = createTableCard();
     }
 
@@ -207,15 +206,4 @@ public class ContextDataBase implements Context {
         }
         return count_user;
     }
-
-
-    //    public static void main(String[] args) throws InterruptedException {
-    //        ContextDataBase contextDataBase = new ContextDataBase("test.db");
-    //      //  contextDataBase.init();
-    //        User user = new User();
-    //        System.out.println(contextDataBase.addUser(user));
-    //        Thread.sleep(2500);
-    //        System.out.println("cont");
-    //        System.out.println(contextDataBase.containsUser(new Card("4000000000000010","1921")));
-    //    }
 }

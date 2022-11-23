@@ -9,7 +9,7 @@ public class LogInAccount_Action extends Action {
 
     private final  PersonalMenu personalMenu;
 
-    public LogInAccount_Action(int numberItem, LoginMenu loginMenu, PersonalMenu personalMenu) { //FIXME ВЫНЕСТИ В КОНТРОЛЛЕР
+    public LogInAccount_Action(int numberItem, LoginMenu loginMenu, PersonalMenu personalMenu) {
         super(title, numberItem);
         this.loginMenu = loginMenu;
         this.personalMenu = personalMenu;
