@@ -46,7 +46,7 @@ public class Card {
      * @param number Card number
      * @param PIN    Pin code of the card
      */
-    public Card(String number, String PIN) { //FIXME ПРИКРУТИТЬ СЮДА ПРОВЕРКУ НА ФОРМАТ КАРТЫ
+    public Card(String number, String PIN) {
         this.number = number;
         this.PIN = new Pin(PIN);
     }

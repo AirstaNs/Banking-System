@@ -7,7 +7,7 @@ import banking.Formatters.UIDFormat;
 import java.util.Objects;
 
 
-public class UID { //FIXME -> default package
+public class UID {
 
     private static int count = 0;
     private final int ID;
@@ -60,10 +60,3 @@ public class UID { //FIXME -> default package
         return Objects.hash(ID);
     }
 }
-//    public static void main(String[] args) {
-//        Stream.generate(client.UID.Instance()::getID)
-//                .limit(5)
-//                .forEach(System.out::println);
-//        client.UID u = new client.UID();
-//        System.out.println(u.getID());
-//    }

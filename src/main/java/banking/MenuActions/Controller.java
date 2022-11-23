@@ -16,9 +16,8 @@ public class Controller {
     /**
      * Page with menu actions.
      */
-    private List<Action> page; //FIXME PAGE
+    private List<Action> page;
 
-    //  private List<ShouldBeExit> views; TODO ДОРАБОТАТЬ
 
     private Context context;
 
@@ -34,7 +33,6 @@ public class Controller {
     public void setPage(List<Action> actions) {
         this.page = actions;
     }
-    //    public void setViews(List<ShouldBeExit> views) {this.views = actions;}
 
     /**
      * The method performs an action on the given page number.

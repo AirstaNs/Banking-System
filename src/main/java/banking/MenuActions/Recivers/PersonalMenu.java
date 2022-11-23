@@ -38,7 +38,8 @@ public class PersonalMenu implements ShouldBeExit {
      * Action to display the balance on the console for a specific user
      */
     public void balance() {
-        System.out.println(user.getCard().getBalance()); //FIXME
+        System.out.println(user.getCard()
+                               .getBalance());
     }
 
     /**

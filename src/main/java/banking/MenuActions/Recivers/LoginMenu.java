@@ -55,7 +55,7 @@ public class LoginMenu implements ShouldBeExit {
         var user = controller.getContext()
                              .getUser(number, pin);
 
-        // TODO возможно связано с Context, вставлять брать из Context
+
         user.ifPresentOrElse((person) -> {
             personalMenu.setUser(person);
             System.out.println("You have successfully logged in!");

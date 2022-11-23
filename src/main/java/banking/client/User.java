@@ -14,12 +14,12 @@ public class User {
 
     public User() {
         ID = new UID();
-        card = new Card(new PinFormat(), ID);//.generated(id);
+        card = new Card(new PinFormat(), ID);
     }
 
     public User(int id, String card_number, String pin, int balance) {
         ID = new UID(id);
-        card = new Card(card_number, pin);//.generated(id);
+        card = new Card(card_number, pin);
         card.setBalance(new Balance(card));
         card.getBalance()
             .deposit((long) balance);
