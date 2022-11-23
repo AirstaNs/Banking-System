@@ -4,6 +4,7 @@ package banking.MenuActions;
 import banking.MenuActions.Recivers.LoginMenu;
 import banking.MenuActions.Recivers.PersonalMenu;
 import banking.DAO.ContextDataBase;
+import banking.client.UID;
 
 
 import java.util.Scanner;
@@ -23,7 +24,7 @@ public class BankSystem {
     /**
      * Displays all items on the page.
      */
-    public static Controller controller = new Controller();
+    public static Controller controller;
     /**
      * The initialization page is available without logging in. A specific menu item and page
      */
@@ -32,19 +33,36 @@ public class BankSystem {
     /**
      * The personal account page in the system is available after logging in.
      */
-    public static PersonalMenu personalMenu = new PersonalMenu(controller);
+    public static PersonalMenu personalMenu;
 
     /**
      * Launching the banking system, exposes the welcome page - loginMenu. <br>
      * Works as long as {@link BankSystem#isWork}  != false.
      */
     public void start(String nameDB) {
-        loginMenu = new LoginMenu(controller, new ContextDataBase(nameDB));
+        initSystem(nameDB);
+
         controller.setPage(Page.welcomePage(loginMenu, personalMenu));
+
 
         while (isWork) {
             menu(controller);
         }
+    }
+
+    /**
+     * Initializing the Context, Controller and Menu Pages. <br>
+     * Setting the UID counter from the database.
+     *
+     * @param nameDB - the name of the database to be accessed
+     */
+    private void initSystem(String nameDB) {
+        var context = new ContextDataBase(nameDB);
+        context.init();
+        controller = new Controller(context);
+        loginMenu = new LoginMenu(controller);
+        personalMenu = new PersonalMenu(controller);
+        UID.setCount(context.getCountUser());
     }
 
     /**
@@ -56,4 +74,5 @@ public class BankSystem {
         controller.printPage();
         controller.executeCommand(new Scanner(java.lang.System.in).nextInt());
     }
+
 }
