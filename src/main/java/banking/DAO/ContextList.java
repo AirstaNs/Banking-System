@@ -1,11 +1,12 @@
-package banking.client;
+package banking.DAO;
 
 import banking.Card.Card;
+import banking.client.User;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class ContextList {
+public class ContextList implements Context {
     private static final ContextList Instance = new ContextList();
 
     private ContextList() {
@@ -14,9 +15,10 @@ public class ContextList {
 
     private static final ArrayList<User> Users = new ArrayList<>();
 
-    public void addUser(User user) {
+    public int addUser(User user) {
         var userOptional = Optional.ofNullable(user);
         userOptional.ifPresent(Users::add);
+        return 0;
     }
 
     public boolean containsUser(User user) {
