@@ -56,6 +56,11 @@ public class ContextList implements Context {
         return Users.remove(user);
     }
 
+    @Override
+    public int getCountUser() {
+        return Users.size();
+    }
+
 
     public static ContextList getInstance() {
         return Instance;
