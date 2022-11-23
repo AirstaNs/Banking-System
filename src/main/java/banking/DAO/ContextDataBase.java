@@ -11,7 +11,7 @@ public class ContextDataBase implements Context {
     private Connection connection;
 
     public ContextDataBase(String nameDB) {
-        this.URL_SQLITE = "jdbc:sqlite:C:/sqlite/" + nameDB;
+        this.URL_SQLITE = "jdbc:sqlite:src/main/resources/" + nameDB;
         try {
             this.connection = DriverManager.getConnection(URL_SQLITE);
         } catch (SQLException e) {
