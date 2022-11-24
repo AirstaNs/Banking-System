@@ -28,6 +28,7 @@ public class Balance {
      * @param amount the value by which to increase the balance.
      */
     public void deposit(Long amount) {
+        if (amount < 0) throw new RuntimeException();
         this.balance += amount;
     }
 
