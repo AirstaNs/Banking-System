@@ -41,6 +41,19 @@ public class PersonalMenu implements ShouldBeExit {
         System.out.println(user.Card().Balance());
     }
 
+    public void addIncome() { //TODO
+
+    }
+
+    public void transfer() { //TODO
+
+
+    }
+
+    public void closeAccount() { //TODO
+
+    }
+
     /**
      * Exit from the Personal Account. <br>
      * Removing the user from the page, Redirecting to the login page.
