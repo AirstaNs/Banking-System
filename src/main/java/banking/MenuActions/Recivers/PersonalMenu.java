@@ -3,6 +3,7 @@ package banking.MenuActions.Recivers;
 import banking.MenuActions.Controller;
 import banking.MenuActions.BankSystem;
 import banking.MenuActions.Page;
+import banking.Printable;
 import banking.client.User;
 
 /**
@@ -64,7 +65,7 @@ public class PersonalMenu implements ShouldBeExit {
         controller.setPage(Page.welcomePage(BankSystem.loginMenu, BankSystem.personalMenu));
     }
 
-    private enum Message {
+    private enum Message implements Printable {
         LogOut("You have successfully logged out!\n"),
         addIncome("addIncome"),
         transfer("transfer"),
@@ -73,6 +74,11 @@ public class PersonalMenu implements ShouldBeExit {
 
         Message(String message) {
             this.message = message;
+        }
+
+        @Override
+        public void printToConsole() {
+            System.out.println(message);
         }
     }
 }

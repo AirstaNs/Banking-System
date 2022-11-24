@@ -1,9 +1,10 @@
 package banking.Card;
 
 import banking.Formatters.FormatterInt;
+import banking.Printable;
 import banking.RandomGenerate.GenerateSecureRandomInt;
 
-public class Pin {
+public class Pin implements Printable {
     private static final int MAX_VALUE_PIN = 10000;
     private static final int MIN_VALUE_PIN = 0;
     private FormatterInt formatPin;
@@ -13,6 +14,7 @@ public class Pin {
         this.formatPin = format;
         this.pin = create();
     }
+
     protected Pin(String pin) {
         this.pin = pin;
     }
@@ -32,7 +34,9 @@ public class Pin {
         return pin;
     }
 
-    public void printConsole() {
+
+    @Override
+    public void printToConsole() {
         System.out.printf("""
                 Your card PIN:
                 %s

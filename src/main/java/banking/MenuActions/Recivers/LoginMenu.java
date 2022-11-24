@@ -3,6 +3,7 @@ package banking.MenuActions.Recivers;
 import banking.MenuActions.Controller;
 import banking.MenuActions.BankSystem;
 import banking.MenuActions.Page;
+import banking.Printable;
 import banking.client.User;
 
 import java.util.Optional;
@@ -65,20 +66,21 @@ public class LoginMenu implements ShouldBeExit {
         return controller.getContext().getUser(number, pin);
     }
 
-    public enum Message {
+    public enum Message implements Printable {
         INPUT_CARD("Enter your card number:"),
         INPUT_PIN("Enter your PIN:"),
         SUCCESSFUL_LOGIN("You have successfully logged in!"),
         FAILED_LOGIN("Wrong card number or PIN!"),
         transfer("transfer"),
         closeAccount("closeAccount");
-        private String message;
+        private final String message;
 
         Message(String message) {
             this.message = message;
         }
 
-        public void printConsole() {
+        @Override
+        public void printToConsole() {
             System.out.println(message);
         }
     }

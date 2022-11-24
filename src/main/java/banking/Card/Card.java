@@ -1,6 +1,7 @@
 package banking.Card;
 
 import banking.Formatters.FormatterInt;
+import banking.Printable;
 import banking.client.UID;
 
 
@@ -11,7 +12,7 @@ import static banking.Card.DebitCardFormat.BIN;
 /**
  * A class that describes the Card of a specific client.
  */
-public class Card {
+public class Card implements Printable {
     /**
      * The variable storing the card number must be 16 numbers.
      */
@@ -87,7 +88,8 @@ public class Card {
         return number;
     }
 
-    public void printConsole() {
+    @Override
+    public void printToConsole() {
         System.out.printf("""
                 Your card number:
                 %s

@@ -4,10 +4,11 @@ import banking.Card.Balance;
 import banking.Card.Card;
 
 import banking.Formatters.PinFormat;
+import banking.Printable;
 
 import java.util.Objects;
 
-public class User {
+public class User implements Printable {
     private final UID ID;
     private final Card card;
 
@@ -25,9 +26,8 @@ public class User {
     }
 
     public void printToConsole() {
-        card.printConsole();
-        card.PIN()
-            .printConsole();
+        card.printToConsole();
+        card.PIN().printToConsole();
     }
 
     @Override
