@@ -19,9 +19,7 @@ public class ContextDataBase implements Context {
         createDataBase(path, nameDB);
         try {
             this.connection = DriverManager.getConnection(URL_SQLITE);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        } catch (SQLException e) {e.printStackTrace();}
     }
 
     public void init() {
@@ -35,21 +33,18 @@ public class ContextDataBase implements Context {
                 Files.createDirectories(Path.of(path));
                 Files.createFile(tempF);
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        } catch (IOException e) {throw new RuntimeException(e);}
     }
 
     private boolean dropTable() {
         String drop = """
-                 DROP TABLE IF EXISTS card;
+                DROP TABLE IF EXISTS card;
                 """;
+        boolean isDrop = false;
         try (var prepareStatement = connection.prepareStatement(drop)) {
-            return prepareStatement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+            isDrop = prepareStatement.execute();
+        } catch (SQLException e) {e.printStackTrace();}
+        return isDrop;
     }
 
     private boolean createTableCard() {
@@ -61,12 +56,11 @@ public class ContextDataBase implements Context {
                 pin text NOT NULL,
                 balance integer DEFAULT 0);
                  """;
+        boolean isCreate = false;
         try (var preparedStatement = connection.prepareStatement(createCardTable)) {
-            return preparedStatement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+            isCreate = preparedStatement.execute();
+        } catch (SQLException e) {e.printStackTrace();}
+        return isCreate;
     }
 
     private boolean createTableUser() {
@@ -94,18 +88,14 @@ public class ContextDataBase implements Context {
                 (pin,number)
                 VALUES(?,?);
                  """;
+        int updateRows = -1;
         try (var statement = connection.prepareStatement(insertUser)) {
-            statement.setString(1, user.Card()
-                                       .PIN()
-                                       .toString());
-            statement.setString(2, user.Card()
-                                       .getNumber());
+            statement.setString(1, user.Card().PIN().toString());
+            statement.setString(2, user.Card().getNumber());
 
-            return statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
+            updateRows = statement.executeUpdate();
+        } catch (SQLException e) {e.printStackTrace();}
+        return updateRows;
     }
 
     @Override
@@ -115,22 +105,19 @@ public class ContextDataBase implements Context {
                 FROM card
                 WHERE id = ?
                  """;
+        boolean existsUser = false;
         try (var statement = connection.prepareStatement(containsUser)) {
-            statement.setInt(1, user.ID()
-                                    .getID());
+            statement.setInt(1, user.ID().getID());
 
             var us = statement.executeQuery();
-            while (us.next()) {
-                int id = us.getInt("id");
-                String number = us.getString("number");
-                String pin = us.getString("pin");
-                int balance = us.getInt("balance");
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
+            //                int id = us.getInt("id");
+            //                String number = us.getString("number");
+            //                String pin = us.getString("pin");
+            //                int balance = us.getInt("balance");
+            existsUser = us.next();
+
+        } catch (SQLException e) {e.printStackTrace();}
+        return existsUser;
     }
 
     @Override
@@ -139,17 +126,15 @@ public class ContextDataBase implements Context {
                 SELECT * FROM card
                 WHERE number = ? AND pin = ?
                  """;
+        boolean existsUser = false;
         try (var statement = connection.prepareStatement(contains)) {
             statement.setString(1, cardUser.getNumber());
-            statement.setString(2, cardUser.PIN()
-                                           .toString());
+            statement.setString(2, cardUser.PIN().toString());
+            var user = statement.executeQuery();
+            existsUser = user.next();
+        } catch (SQLException e) {e.printStackTrace();}
 
-            var us = statement.executeQuery();
-            return us.first();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
+        return existsUser;
     }
 
     @Override
@@ -168,24 +153,22 @@ public class ContextDataBase implements Context {
                 SELECT * FROM card
                 WHERE number = ? AND pin = ?;
                 """;
+        Optional<User> optionalUser = Optional.empty();
         try (var statement = connection.prepareStatement(selectUser)) {
             statement.setString(1, card.getNumber());
-            statement.setString(2, card.PIN()
-                                       .toString());
+            statement.setString(2, card.PIN().toString());
 
-            var us = statement.executeQuery();
-            if (us.next()) {
-                int id = us.getInt("id");
-                String number = us.getString("number" + "");
-                String pin = us.getString("pin");
-                long balance = us.getLong("balance");
+            var user = statement.executeQuery();
+            if (user.next()) {
+                int id = user.getInt("id");
+                String number = user.getString("number" + "");
+                String pin = user.getString("pin");
+                long balance = user.getLong("balance");
 
-                return Optional.of(new User(id, number, pin, balance));
+                optionalUser = Optional.of(new User(id, number, pin, balance));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return Optional.empty();
+        } catch (SQLException e) {e.printStackTrace();}
+        return optionalUser;
     }
 
     @Override
@@ -194,17 +177,15 @@ public class ContextDataBase implements Context {
                 DELETE FROM card
                 WHERE id = ?;
                  """;
+        boolean isRemove = false;
         try (var statement = connection.prepareStatement(deleteUser)) {
 
-            statement.setInt(1, user.ID()
-                                    .getID());
-            var us = statement.executeQuery();
+            statement.setInt(1, user.ID().getID());
+            var removeUser = statement.executeQuery();
+            isRemove = removeUser.first();
 
-            return us.first();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
+        } catch (SQLException e) {e.printStackTrace();}
+        return isRemove;
     }
 
     public int getCountUser() {
@@ -214,13 +195,11 @@ public class ContextDataBase implements Context {
                 """;
         int count_user = -1;
         try (var statement = connection.prepareStatement(selectUser)) {
-            var us = statement.executeQuery();
-            if (us.next()) {
-                count_user = us.getInt("count_user");
+            var userCount = statement.executeQuery();
+            if (userCount.next()) {
+                count_user = userCount.getInt("count_user");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        } catch (SQLException e) {e.printStackTrace();}
         return count_user;
     }
 }
