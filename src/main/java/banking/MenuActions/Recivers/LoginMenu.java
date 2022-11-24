@@ -5,6 +5,7 @@ import banking.MenuActions.BankSystem;
 import banking.MenuActions.Page;
 import banking.client.User;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 /**
@@ -32,8 +33,7 @@ public class LoginMenu implements ShouldBeExit {
      */
     public void createAccount() {
         var user = new User();
-        controller.getContext()
-                  .addUser(user);
+        controller.getContext().addUser(user);
         user.printToConsole();
     }
 
@@ -47,19 +47,39 @@ public class LoginMenu implements ShouldBeExit {
      * @param personalMenu
      */
     public void LogInAccount(PersonalMenu personalMenu) {
-        System.out.println("Enter your card number:");
-        Scanner scanner = new Scanner(System.in);
-        var number = scanner.next();
-        System.out.println("Enter your PIN:");
-        var pin = scanner.next();
-        var user = controller.getContext()
-                             .getUser(number, pin);
+        var optionalUser = initialUserFromConsole();
 
-
-        user.ifPresentOrElse((person) -> {
+        optionalUser.ifPresentOrElse((person) -> {
             personalMenu.setUser(person);
-            System.out.println("You have successfully logged in!");
+            System.out.println(Message.SUCCESSFUL_LOGIN);
             controller.setPage(Page.personalPage(BankSystem.personalMenu));
-        }, () -> System.out.println("Wrong card number or PIN!"));
+        }, () -> System.out.println(Message.FAILED_LOGIN));
+    }
+
+    private Optional<User> initialUserFromConsole() {
+        System.out.println(Message.INPUT_CARD);
+        Scanner scanner = new Scanner(System.in);
+        String number = scanner.next();
+        System.out.println(Message.INPUT_PIN);
+        String pin = scanner.next();
+        return controller.getContext().getUser(number, pin);
+    }
+
+    public enum Message {
+        INPUT_CARD("Enter your card number:"),
+        INPUT_PIN("Enter your PIN:"),
+        SUCCESSFUL_LOGIN("You have successfully logged in!"),
+        FAILED_LOGIN("Wrong card number or PIN!"),
+        transfer("transfer"),
+        closeAccount("closeAccount");
+        private String message;
+
+        Message(String message) {
+            this.message = message;
+        }
+
+        public void printConsole() {
+            System.out.println(message);
+        }
     }
 }

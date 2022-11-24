@@ -59,8 +59,20 @@ public class PersonalMenu implements ShouldBeExit {
      * Removing the user from the page, Redirecting to the login page.
      */
     public void LogOut() {
-        System.out.println("You have successfully logged out!\n");
+        System.out.println(Message.LogOut);
         user = null;
         controller.setPage(Page.welcomePage(BankSystem.loginMenu, BankSystem.personalMenu));
+    }
+
+    private enum Message {
+        LogOut("You have successfully logged out!\n"),
+        addIncome("addIncome"),
+        transfer("transfer"),
+        closeAccount("closeAccount");
+        private String message;
+
+        Message(String message) {
+            this.message = message;
+        }
     }
 }
