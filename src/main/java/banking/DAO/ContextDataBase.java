@@ -178,7 +178,7 @@ public class ContextDataBase implements Context {
                 int id = us.getInt("id");
                 String number = us.getString("number" + "");
                 String pin = us.getString("pin");
-                int balance = us.getInt("balance");
+                long balance = us.getLong("balance");
 
                 return Optional.of(new User(id, number, pin, balance));
             }

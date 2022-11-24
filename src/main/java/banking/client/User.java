@@ -17,12 +17,11 @@ public class User {
         card = new Card(new PinFormat(), ID);
     }
 
-    public User(int id, String card_number, String pin, int balance) {
+    public User(int id, String card_number, String pin, long balance) {
         ID = new UID(id);
         card = new Card(card_number, pin);
         card.setBalance(new Balance(card));
-        card.getBalance()
-            .deposit((long) balance);
+        card.Balance().deposit(balance);
     }
 
     public void printToConsole() {
