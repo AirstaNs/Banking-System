@@ -3,8 +3,7 @@ package banking.MenuActions;
 import banking.MenuActions.Actions.*;
 import banking.MenuActions.Actions.LoginMenu_Actions.CreateAccount_Action;
 import banking.MenuActions.Actions.LoginMenu_Actions.LogInAccount_Action;
-import banking.MenuActions.Actions.PersonalMenu_Actions.Balance_Action;
-import banking.MenuActions.Actions.PersonalMenu_Actions.LogOutAccount_Action;
+import banking.MenuActions.Actions.PersonalMenu_Actions.*;
 import banking.MenuActions.Recivers.LoginMenu;
 import banking.MenuActions.Recivers.PersonalMenu;
 
@@ -36,6 +35,9 @@ public class Page {
         return new ArrayList<>() {{
             add(new Exit_Action(this.size(), personalMenu));
             add(new Balance_Action(this.size(), personalMenu));
+            add(new AddIncome_Action(this.size(), personalMenu));
+            add(new Transfer_Action(this.size(), personalMenu));
+            add(new CloseAccount_action(this.size(), personalMenu));
             add(new LogOutAccount_Action(this.size(), personalMenu));
         }};
     }
