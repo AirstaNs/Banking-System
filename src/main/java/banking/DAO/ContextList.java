@@ -27,14 +27,14 @@ public class ContextList implements Context {
 
     public boolean containsUser(Card cardUser) {
         return Users.stream()
-                    .map(User::getCard)
+                    .map(User::Card)
                     .anyMatch(cardUser::equals);
     }
 
     public boolean containsUser(String number, String pin) {
         Card checkCard = new Card(number, pin);
         return Users.stream()
-                    .map(User::getCard)
+                    .map(User::Card)
                     .anyMatch(checkCard::equals);
         //   return getUser(checkCard).isPresent();
     }
@@ -47,7 +47,7 @@ public class ContextList implements Context {
 
     public Optional<User> getUser(Card card) {
         return Users.stream()
-                    .filter(user -> user.getCard()
+                    .filter(user -> user.Card()
                                         .equals(card))
                     .findFirst();
     }

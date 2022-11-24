@@ -36,11 +36,11 @@ public class User {
         return card.toString();
     }
 
-    public Card getCard() {
+    public Card Card() {
         return card;
     }
 
-    public UID getID() {
+    public UID ID() {
         return ID;
     }
 

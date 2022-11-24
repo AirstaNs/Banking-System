@@ -33,7 +33,10 @@ public class Pin {
     }
 
     public void printConsole() {
-        System.out.printf("Your card PIN:%n%s", pin);
+        System.out.printf("""
+                Your card PIN:
+                %s
+                """, pin);
     }
 
     @Override

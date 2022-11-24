@@ -95,10 +95,10 @@ public class ContextDataBase implements Context {
                 VALUES(?,?);
                  """;
         try (var statement = connection.prepareStatement(insertUser)) {
-            statement.setString(1, user.getCard()
-                                       .getPIN()
+            statement.setString(1, user.Card()
+                                       .PIN()
                                        .toString());
-            statement.setString(2, user.getCard()
+            statement.setString(2, user.Card()
                                        .getNumber());
 
             return statement.executeUpdate();
@@ -116,7 +116,7 @@ public class ContextDataBase implements Context {
                 WHERE id = ?
                  """;
         try (var statement = connection.prepareStatement(containsUser)) {
-            statement.setInt(1, user.getID()
+            statement.setInt(1, user.ID()
                                     .getID());
 
             var us = statement.executeQuery();
@@ -141,7 +141,7 @@ public class ContextDataBase implements Context {
                  """;
         try (var statement = connection.prepareStatement(contains)) {
             statement.setString(1, cardUser.getNumber());
-            statement.setString(2, cardUser.getPIN()
+            statement.setString(2, cardUser.PIN()
                                            .toString());
 
             var us = statement.executeQuery();
@@ -170,7 +170,7 @@ public class ContextDataBase implements Context {
                 """;
         try (var statement = connection.prepareStatement(selectUser)) {
             statement.setString(1, card.getNumber());
-            statement.setString(2, card.getPIN()
+            statement.setString(2, card.PIN()
                                        .toString());
 
             var us = statement.executeQuery();
@@ -196,7 +196,7 @@ public class ContextDataBase implements Context {
                  """;
         try (var statement = connection.prepareStatement(deleteUser)) {
 
-            statement.setInt(1, user.getID()
+            statement.setInt(1, user.ID()
                                     .getID());
             var us = statement.executeQuery();
 

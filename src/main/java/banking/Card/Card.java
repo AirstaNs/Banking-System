@@ -70,7 +70,7 @@ public class Card {
         return number;
     }
 
-    public Pin getPIN() {
+    public Pin PIN() {
         return PIN;
     }
 
@@ -91,8 +91,7 @@ public class Card {
         System.out.printf("""
                 Your card number:
                 %s
-                %s
-                """, number, PIN);
+                """, number);
     }
 
 
