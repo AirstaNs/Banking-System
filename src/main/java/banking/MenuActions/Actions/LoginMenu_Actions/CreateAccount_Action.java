@@ -1,5 +1,6 @@
-package banking.MenuActions.Actions;
+package banking.MenuActions.Actions.LoginMenu_Actions;
 
+import banking.MenuActions.Actions.Action;
 import banking.MenuActions.Recivers.LoginMenu;
 
 public class CreateAccount_Action extends Action {

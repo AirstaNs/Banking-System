@@ -1,6 +1,10 @@
 package banking.MenuActions;
 
 import banking.MenuActions.Actions.*;
+import banking.MenuActions.Actions.LoginMenu_Actions.CreateAccount_Action;
+import banking.MenuActions.Actions.LoginMenu_Actions.LogInAccount_Action;
+import banking.MenuActions.Actions.PersonalMenu_Actions.Balance_Action;
+import banking.MenuActions.Actions.PersonalMenu_Actions.LogOutAccount_Action;
 import banking.MenuActions.Recivers.LoginMenu;
 import banking.MenuActions.Recivers.PersonalMenu;
 

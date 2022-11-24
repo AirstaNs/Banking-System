@@ -1,6 +1,7 @@
-package banking.MenuActions.Actions;
+package banking.MenuActions.Actions.PersonalMenu_Actions;
 
 
+import banking.MenuActions.Actions.Action;
 import banking.MenuActions.Recivers.PersonalMenu;
 
 public class Balance_Action extends Action {
