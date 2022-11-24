@@ -3,6 +3,9 @@ package banking.DAO;
 import banking.Card.Card;
 import banking.client.User;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.*;
 import java.util.Optional;
 
@@ -11,7 +14,9 @@ public class ContextDataBase implements Context {
     private Connection connection;
 
     public ContextDataBase(String nameDB) {
-        this.URL_SQLITE = "jdbc:sqlite:src/main/resources/" + nameDB;
+        String path = "D:/BankingSystemDB/";
+        this.URL_SQLITE = "jdbc:sqlite:" + path + nameDB;
+        createDataBase(path, nameDB);
         try {
             this.connection = DriverManager.getConnection(URL_SQLITE);
         } catch (SQLException e) {
@@ -21,6 +26,18 @@ public class ContextDataBase implements Context {
 
     public void init() {
         boolean b = createTableCard();
+    }
+
+    private void createDataBase(String path, String nameDB) {
+        try {
+            var tempF = Path.of(path + nameDB);
+            if (!Files.exists(tempF)) {
+                Files.createDirectories(Path.of(path));
+                Files.createFile(tempF);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private boolean dropTable() {
