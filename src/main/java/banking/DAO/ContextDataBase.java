@@ -202,4 +202,39 @@ public class ContextDataBase implements Context {
         } catch (SQLException e) {e.printStackTrace();}
         return updateRows;
     }
+
+    @Override
+    public int transfer(User user, String number, long amount) {
+        String fromUser = """
+                UPDATE  card
+                SET balance = balance-?
+                WHERE id = ?
+                 """;
+        String toCard = """
+                UPDATE card
+                SET balance = balance+?
+                WHERE number = ?;
+                """;
+        int updateRows = -1;
+        try (var fromStatement = connection.prepareStatement(fromUser); var toStatement = connection.prepareStatement(toCard)) {
+            connection.setAutoCommit(false);
+            user.Card().Balance().withdraw(amount);
+            fromStatement.setLong(1, amount);
+            fromStatement.setInt(2, user.ID().getID());
+            updateRows = fromStatement.executeUpdate();
+
+
+            toStatement.setLong(1, amount);
+            toStatement.setString(2, number);
+            toStatement.executeUpdate();
+
+            connection.setAutoCommit(true);
+        } catch (SQLException e) {
+            user.Card().Balance().deposit(amount);
+            try {
+                connection.rollback();
+            } catch (SQLException exception) {exception.printStackTrace();}
+        }
+        return updateRows;
+    }
 }

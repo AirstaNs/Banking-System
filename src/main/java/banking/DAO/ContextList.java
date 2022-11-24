@@ -66,6 +66,10 @@ public class ContextList implements Context {
         return 1;
     }
 
+    @Override
+    public int transfer(User user, String number, long amount) {
+        return 0;
+    }
 
     public static ContextList getInstance() {
         return Instance;
