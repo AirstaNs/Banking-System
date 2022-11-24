@@ -28,4 +28,6 @@ public interface Context {
     int getCountUser();
 
     int updateBalance(User user);
+
+    int transfer(User user, String number, long amount);
 }
