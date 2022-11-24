@@ -37,9 +37,7 @@ public class ContextDataBase implements Context {
     }
 
     private boolean dropTable() {
-        String drop = """
-                DROP TABLE IF EXISTS card;
-                """;
+        String drop = "DROP TABLE IF EXISTS card;" ;
         boolean isDrop = false;
         try (var prepareStatement = connection.prepareStatement(drop)) {
             isDrop = prepareStatement.execute();
@@ -51,8 +49,7 @@ public class ContextDataBase implements Context {
         String createCardTable = """
                 CREATE TABLE IF NOT EXISTS card(
                 id integer  PRIMARY KEY,
-                number
-                 text NOT NULL,
+                number text NOT NULL,
                 pin text NOT NULL,
                 balance integer DEFAULT 0);
                  """;
@@ -100,21 +97,13 @@ public class ContextDataBase implements Context {
 
     @Override
     public boolean containsUser(User user) {
-        String containsUser = """
-                SELECT *
-                FROM card
-                WHERE id = ?
-                 """;
+        String containsUser = "SELECT * FROM card WHERE id = ?" ;
         boolean existsUser = false;
         try (var statement = connection.prepareStatement(containsUser)) {
             statement.setInt(1, user.ID().getID());
 
-            var us = statement.executeQuery();
-            //                int id = us.getInt("id");
-            //                String number = us.getString("number");
-            //                String pin = us.getString("pin");
-            //                int balance = us.getInt("balance");
-            existsUser = us.next();
+            var userDb = statement.executeQuery();
+            existsUser = userDb.next();
 
         } catch (SQLException e) {e.printStackTrace();}
         return existsUser;
@@ -149,9 +138,9 @@ public class ContextDataBase implements Context {
 
     @Override
     public Optional<User> getUser(Card card) {
-        String selectUser = """
+        String selectUser = """ 
                 SELECT * FROM card
-                WHERE number = ? AND pin = ?;
+                WHERE number = ? AND pin = ?
                 """;
         Optional<User> optionalUser = Optional.empty();
         try (var statement = connection.prepareStatement(selectUser)) {
@@ -173,10 +162,7 @@ public class ContextDataBase implements Context {
 
     @Override
     public boolean removeUser(User user) {
-        String deleteUser = """
-                DELETE FROM card
-                WHERE id = ?;
-                 """;
+        String deleteUser = "DELETE FROM card WHERE id = ?" ;
         boolean isRemove = false;
         try (var statement = connection.prepareStatement(deleteUser)) {
 
@@ -189,10 +175,7 @@ public class ContextDataBase implements Context {
     }
 
     public int getCountUser() {
-        String selectUser = """
-                SELECT COUNT(*) AS count_user
-                FROM card;
-                """;
+        String selectUser = "SELECT COUNT(*) AS count_user FROM card" ;
         int count_user = -1;
         try (var statement = connection.prepareStatement(selectUser)) {
             var userCount = statement.executeQuery();
