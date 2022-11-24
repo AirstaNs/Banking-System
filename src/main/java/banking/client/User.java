@@ -27,6 +27,8 @@ public class User {
 
     public void printToConsole() {
         card.printConsole();
+        card.PIN()
+            .printConsole();
     }
 
     @Override
