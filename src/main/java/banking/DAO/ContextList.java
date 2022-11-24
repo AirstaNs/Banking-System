@@ -61,6 +61,11 @@ public class ContextList implements Context {
         return Users.size();
     }
 
+    @Override
+    public int updateBalance(User user) {
+        return 1;
+    }
+
 
     public static ContextList getInstance() {
         return Instance;

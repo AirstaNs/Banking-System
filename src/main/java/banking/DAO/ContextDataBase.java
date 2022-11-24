@@ -167,8 +167,8 @@ public class ContextDataBase implements Context {
         try (var statement = connection.prepareStatement(deleteUser)) {
 
             statement.setInt(1, user.ID().getID());
-            var removeUser = statement.executeQuery();
-            isRemove = removeUser.first();
+            var removeUser = statement.executeUpdate();
+            isRemove = removeUser > 0;
 
         } catch (SQLException e) {e.printStackTrace();}
         return isRemove;
@@ -184,5 +184,22 @@ public class ContextDataBase implements Context {
             }
         } catch (SQLException e) {e.printStackTrace();}
         return count_user;
+    }
+
+    @Override
+    public int updateBalance(User user) {
+        String update = """
+                UPDATE  card
+                SET balance = ?
+                WHERE id = ?
+                 """;
+        int updateRows = -1;
+        try (var statement = connection.prepareStatement(update)) {
+            statement.setLong(1, user.Card().Balance().getBalance());
+            statement.setInt(2, user.ID().getID());
+
+            updateRows = statement.executeUpdate();
+        } catch (SQLException e) {e.printStackTrace();}
+        return updateRows;
     }
 }

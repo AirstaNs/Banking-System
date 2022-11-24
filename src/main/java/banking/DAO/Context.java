@@ -27,4 +27,5 @@ public interface Context {
 
     int getCountUser();
 
+    int updateBalance(User user);
 }

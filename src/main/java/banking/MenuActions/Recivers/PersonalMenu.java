@@ -6,6 +6,8 @@ import banking.MenuActions.Page;
 import banking.Printable;
 import banking.client.User;
 
+import java.util.Scanner;
+
 /**
  * RECEIVER  in Command pattern
  * <br>
@@ -43,7 +45,15 @@ public class PersonalMenu implements ShouldBeExit {
     }
 
     public void addIncome() { //TODO
-
+        Message.ADD_INCOME_INPUT.printToConsole();
+        try {
+            long amount = new Scanner(System.in).nextLong();
+            user.Card().Balance().deposit(amount);
+            controller.getContext().updateBalance(user);
+            Message.ADD_INCOME_SUCCESSFULLY.printToConsole();
+        } catch (RuntimeException e) {
+            Message.ADD_INCOME_FAILED.printToConsole();
+        }
     }
 
     public void transfer() { //TODO
@@ -52,7 +62,14 @@ public class PersonalMenu implements ShouldBeExit {
     }
 
     public void closeAccount() { //TODO
-
+        boolean isRemove = controller.getContext().removeUser(user);
+        if (isRemove) {
+            Message.CLOSE_ACCOUNT.printToConsole();
+            user = null;
+            controller.setPage(Page.welcomePage(BankSystem.loginMenu, BankSystem.personalMenu));
+        } else {
+            throw new RuntimeException("Аккаунт не закрылся");
+        }
     }
 
     /**
@@ -67,10 +84,12 @@ public class PersonalMenu implements ShouldBeExit {
 
     private enum Message implements Printable {
         LOG_OUT("You have successfully logged out!\n"),
-        addIncome("addIncome"),
+        ADD_INCOME_INPUT("Enter income:"),
+        ADD_INCOME_SUCCESSFULLY("Income was added!\n"),
+        ADD_INCOME_FAILED("Amount less than zero\n"),
         transfer("transfer"),
-        closeAccount("closeAccount");
-        private String message;
+        CLOSE_ACCOUNT("The account has been closed!\n");
+        private final String message;
 
         Message(String message) {
             this.message = message;
