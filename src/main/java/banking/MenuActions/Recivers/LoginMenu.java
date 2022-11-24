@@ -9,6 +9,7 @@ import banking.client.User;
 import java.util.Optional;
 import java.util.Scanner;
 
+import static banking.MenuActions.Recivers.LoginMenu.Message.*;
 /**
  * RECEIVER  in Command pattern
  * <br>
@@ -52,16 +53,16 @@ public class LoginMenu implements ShouldBeExit {
 
         optionalUser.ifPresentOrElse((person) -> {
             personalMenu.setUser(person);
-            System.out.println(Message.SUCCESSFUL_LOGIN);
+            SUCCESSFUL_LOGIN.printToConsole();
             controller.setPage(Page.personalPage(BankSystem.personalMenu));
-        }, () -> System.out.println(Message.FAILED_LOGIN));
+        }, FAILED_LOGIN::printToConsole);
     }
 
     private Optional<User> initialUserFromConsole() {
-        System.out.println(Message.INPUT_CARD);
+        INPUT_CARD.printToConsole();
         Scanner scanner = new Scanner(System.in);
         String number = scanner.next();
-        System.out.println(Message.INPUT_PIN);
+        INPUT_PIN.printToConsole();
         String pin = scanner.next();
         return controller.getContext().getUser(number, pin);
     }
@@ -71,6 +72,7 @@ public class LoginMenu implements ShouldBeExit {
         INPUT_PIN("Enter your PIN:"),
         SUCCESSFUL_LOGIN("You have successfully logged in!"),
         FAILED_LOGIN("Wrong card number or PIN!"),
+
         transfer("transfer"),
         closeAccount("closeAccount");
         private final String message;
