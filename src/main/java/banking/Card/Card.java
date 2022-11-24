@@ -74,7 +74,7 @@ public class Card {
         return PIN;
     }
 
-    public Balance getBalance() {
+    public Balance Balance() {
         return Balance;
     }
 

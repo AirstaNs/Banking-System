@@ -38,8 +38,7 @@ public class PersonalMenu implements ShouldBeExit {
      * Action to display the balance on the console for a specific user
      */
     public void balance() {
-        System.out.println(user.Card()
-                               .getBalance());
+        System.out.println(user.Card().Balance());
     }
 
     /**
