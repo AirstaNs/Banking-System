@@ -1,5 +1,6 @@
 package banking.MenuActions.Recivers;
 
+import banking.Card.AlgorithmLuna;
 import banking.MenuActions.Controller;
 import banking.MenuActions.BankSystem;
 import banking.MenuActions.Page;
@@ -52,13 +53,33 @@ public class PersonalMenu implements ShouldBeExit {
             controller.getContext().updateBalance(user);
             Message.ADD_INCOME_SUCCESSFULLY.printToConsole();
         } catch (RuntimeException e) {
-            Message.ADD_INCOME_FAILED.printToConsole();
+            Message.ERROR_ADD_INCOME_FAILED.printToConsole();
         }
     }
 
-    public void transfer() { //TODO
+    public void transfer() { //TOD
+        Scanner scanner = new Scanner(System.in);
+        Message.TRANSFER_ENTER_CARD.printToConsole();
+        String toNumberCard = scanner.next();
 
+        if (user.Card().getNumber().equals(toNumberCard)) {
+            Message.ERROR_TRANSFER_TO_YOURSELF.printToConsole();
+            return;
+        } else if (!new AlgorithmLuna(toNumberCard).isFormattedLuna()) {
+            Message.ERROR_TRANSFER_CARD_NUMBER_NOT_LUNA.printToConsole();
+            return;
+        } else if (!controller.getContext().containsUser(toNumberCard)) {
+            Message.ERROR_TRANSFER_CARD_NOT_EXIST.printToConsole();
+            return;
+        }
 
+        Message.TRANSFER_ENTER_AMOUNT.printToConsole();
+        long amount = scanner.nextLong();
+        if (user.Card().Balance().getBalance() < amount) {
+            Message.ERROR_TRANSFER_NOT_MONEY.printToConsole();
+            return;
+        }
+        controller.getContext().transfer(user, toNumberCard, amount);
     }
 
     public void closeAccount() { //TODO
@@ -86,8 +107,13 @@ public class PersonalMenu implements ShouldBeExit {
         LOG_OUT("You have successfully logged out!\n"),
         ADD_INCOME_INPUT("Enter income:"),
         ADD_INCOME_SUCCESSFULLY("Income was added!\n"),
-        ADD_INCOME_FAILED("Amount less than zero\n"),
-        transfer("transfer"),
+        ERROR_ADD_INCOME_FAILED("Amount less than zero\n"),
+        TRANSFER_ENTER_CARD("Transfer\n" + "Enter card number:"),
+        TRANSFER_ENTER_AMOUNT("Enter how much money you want to transfer:"),
+        ERROR_TRANSFER_NOT_MONEY("Not enough money!\n"),
+        ERROR_TRANSFER_TO_YOURSELF("You can't transfer money to the same account!\n"),
+        ERROR_TRANSFER_CARD_NUMBER_NOT_LUNA("Probably you made a mistake in the card number. Please try again!\n"),
+        ERROR_TRANSFER_CARD_NOT_EXIST("Such a card does not exist."),
         CLOSE_ACCOUNT("The account has been closed!\n");
         private final String message;
 
