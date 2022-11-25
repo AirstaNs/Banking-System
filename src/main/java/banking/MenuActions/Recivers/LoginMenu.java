@@ -71,10 +71,7 @@ public class LoginMenu implements ShouldBeExit {
         INPUT_CARD("Enter your card number:"),
         INPUT_PIN("Enter your PIN:"),
         SUCCESSFUL_LOGIN("You have successfully logged in!"),
-        FAILED_LOGIN("Wrong card number or PIN!"),
-
-        transfer("transfer"),
-        closeAccount("closeAccount");
+        FAILED_LOGIN("Wrong card number or PIN!");
         private final String message;
 
         Message(String message) {
