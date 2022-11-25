@@ -16,6 +16,8 @@ public interface Context {
 
     boolean containsUser(User user);
 
+    boolean containsUser(String card);
+
     boolean containsUser(Card cardUser);
 
     boolean containsUser(String number, String pin);

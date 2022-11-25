@@ -1,6 +1,7 @@
 package banking.DAO;
 
 import banking.Card.Card;
+import banking.client.UID;
 import banking.client.User;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class ContextDataBase implements Context {
         createDataBase(path, nameDB);
         try {
             this.connection = DriverManager.getConnection(URL_SQLITE);
+            UID.setCount(this.getCountUser());
         } catch (SQLException e) {e.printStackTrace();}
     }
 
@@ -129,6 +131,19 @@ public class ContextDataBase implements Context {
     @Override
     public boolean containsUser(String number, String pin) {
         return false;
+    }
+
+    @Override
+    public boolean containsUser(String card) {
+        String contains = "SELECT * FROM card WHERE number = ?";
+        boolean existsUser = false;
+        try (var statement = connection.prepareStatement(contains)) {
+            statement.setString(1, card);
+            var user = statement.executeQuery();
+            existsUser = user.next();
+        } catch (SQLException e) {e.printStackTrace();}
+
+        return existsUser;
     }
 
     @Override

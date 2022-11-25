@@ -71,6 +71,11 @@ public class ContextList implements Context {
         return 0;
     }
 
+    @Override
+    public boolean containsUser(String card) {
+        return false;
+    }
+
     public static ContextList getInstance() {
         return Instance;
     }
