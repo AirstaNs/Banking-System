@@ -25,8 +25,7 @@ public class AlgorithmLuna {
     }
 
     /**
-     * Get checksum digit
-     *
+     * Get the checksum for {@link #card} <br>
      * @return checksum digit
      */
     public int getNextNumberCardFormatLuna() {
@@ -38,6 +37,11 @@ public class AlgorithmLuna {
 
     }
 
+    /**
+     * The method checks {@link #card} against the Luna algorithm. <br>
+     * Invokes the {@link #getSumFromCardNumber()} and {@link #setIndexesExecuteAlgorithm(boolean, boolean)}
+     * @return if the sum is a multiple of 10, returns true.
+     */
     public boolean isFormattedLuna() {
         boolean isGetNextNumber = false;
         setIndexesExecuteAlgorithm(isEvenLength, isGetNextNumber);
@@ -51,11 +55,10 @@ public class AlgorithmLuna {
      * @return sum according to the Luna algorithm
      */
     private int getSumFromCardNumber(int[] charsCard) {
-        int sum = IntStream.range(0, charsCard.length)
-                           .map(i -> alternate.apply(i) ? multiplyTwo(charsCard[i]) : charsCard[i])
-                           .map(sumDigitsNumber)
-                           .sum();
-        return sum;
+        return IntStream.range(0, charsCard.length)
+                        .map(i -> alternate.apply(i) ? multiplyTwo(charsCard[i]) : charsCard[i])
+                        .map(sumDigitsNumber)
+                        .sum();
     }
 
     private int getSumFromCardNumber() {
@@ -70,10 +73,10 @@ public class AlgorithmLuna {
      * @param isGetNextNumber responsible for alternate which function to take.  Otherwise, the {@link #isFormattedLuna()} method does not work correctly.
      */
     private void setIndexesExecuteAlgorithm(boolean isEvenLength, boolean isGetNextNumber) {
-        /*  false ^ false = false
-         *  false ^ true = true
-         *  true ^ false = true
-         *  true ^ true = false
+        /*  false ^ false = false -> isOdd
+         *  false ^ true = true -> isEven
+         *  true ^ false = true -> isEven
+         *  true ^ true = false -> isOdd
          */
         if (isGetNextNumber ^ isEvenLength) {
             alternate = Utils::isEven;
