@@ -47,7 +47,6 @@ public class AlgorithmLuna {
 
     /**
      * Get the sum using the Luna algorithm.
-     *
      * @param charsCard Array of card digits
      * @return sum according to the Luna algorithm
      */
@@ -68,7 +67,7 @@ public class AlgorithmLuna {
      * Is set in the constructor. <br>
      *
      * @param isEvenLength    Depends on card length. <br> If the length of the map is odd, then we go to odd indices and vice versa.
-     * @param isGetNextNumber responsible for alternate which function to take.  Otherwise, the {@link #isFormattedLuna()} isFormattedLuna} method does not work correctly.
+     * @param isGetNextNumber responsible for alternate which function to take.  Otherwise, the {@link #isFormattedLuna()} method does not work correctly.
      */
     private void setIndexesExecuteAlgorithm(boolean isEvenLength, boolean isGetNextNumber) {
         /*  false ^ false = false
@@ -82,11 +81,6 @@ public class AlgorithmLuna {
             alternate = Utils::isOdd;
 
         }
-        //        if (isEvenLength) {
-        //            alternate = Utils::isOdd;
-        //        } else {
-        //            alternate = Utils::isEven;
-        //        }
     }
 
     /**
@@ -110,50 +104,5 @@ public class AlgorithmLuna {
      */
     private int getMissingValueMultipleTen(int sum) {
         return (10 - sum % 10) % 10;
-    }
-
-    public static void main(String[] args) {
-        String numb = "1000000016" ;
-        var x = new AlgorithmLuna(numb);
-        System.out.println(x.isFormattedLuna());
-        System.out.println(isValidLuhn(numb));
-        System.out.println(checkLuhn(numb));
-
-    }
-
-    // get Sum Control
-    private static int isValidLuhn(String value) {
-        int sum = Character.getNumericValue(value.charAt(value.length() - 1));
-        int parity = value.length() % 2;
-        for (int i = value.length() - 2; i >= 0; i--) {
-            int summand = Character.getNumericValue(value.charAt(i));
-            if (i % 2 == parity) {
-                int product = summand * 2;
-                summand = (product > 9) ? (product - 9) : product;
-            }
-            sum += summand;
-        }
-        return (sum % 10);
-    }
-
-    // get Next Number
-    public static int checkLuhn(String srt) {
-        int sum = 0;
-        int[] arr = Utils.StringToNumberArray(srt);
-        for (int i = arr.length - 1; i >= 0; i--) {
-            int number = arr[i];
-
-            if (i % 2 == 0) {
-                number *= 2;
-
-                if (number > 9) {
-                    number -= 9;
-                }
-            }
-
-            sum += number;
-        }
-
-        return sum % 10;
     }
 }
