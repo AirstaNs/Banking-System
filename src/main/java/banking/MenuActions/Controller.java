@@ -2,6 +2,7 @@ package banking.MenuActions;
 
 import banking.DAO.Context;
 import banking.MenuActions.Actions.Action;
+import banking.client.User;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Controller {
      */
     private List<Action> page;
 
-
+    private User user;
     private Context context;
 
     public Controller(Context context) {
@@ -26,8 +27,19 @@ public class Controller {
     }
 
     /**
+     * Set the user for this controller.
+     * @param user Personal account of users, detection action for it.
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    /**
      * Sets the page that will then be printed to the console.
-     *
      * @param actions List with possible actions.
      */
     public void setPage(List<Action> actions) {
@@ -40,7 +52,8 @@ public class Controller {
      * @param number the number of the menu item to be set.
      */
     public void executeCommand(int number) {
-        page.get(number).execute();
+        if (number >= page.size()) throw new RuntimeException();
+        page.get(number).execute(this);
     }
 
     /**

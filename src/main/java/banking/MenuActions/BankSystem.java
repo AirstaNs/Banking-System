@@ -60,7 +60,7 @@ public class BankSystem {
         var context = new ContextDataBase(nameDB);
         context.init();
         controller = new Controller(context);
-        loginMenu = new LoginMenu(controller);
+        loginMenu = new LoginMenu();
         personalMenu = new PersonalMenu(controller);
         UID.setCount(context.getCountUser());
     }
