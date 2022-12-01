@@ -233,7 +233,7 @@ public class ContextDataBase implements Context {
         int updateRows = -1;
         try (var fromStatement = connection.prepareStatement(fromUser); var toStatement = connection.prepareStatement(toCard)) {
             connection.setAutoCommit(false);
-            user.Card().Balance().withdraw(amount);
+            user.Card().Balance().withdraw(amount); // TODO
             fromStatement.setLong(1, amount);
             fromStatement.setInt(2, user.ID().getID());
             updateRows = fromStatement.executeUpdate();
