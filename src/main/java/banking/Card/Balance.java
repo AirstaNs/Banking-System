@@ -1,5 +1,7 @@
 package banking.Card;
 
+import banking.Printable;
+
 import java.util.Objects;
 
 /**
@@ -7,7 +9,7 @@ import java.util.Objects;
  * When created, the balance is set by default = 0L. <br>
  * In the {@link Card} class, the balance for the strong link is also passed.
  */
-public class Balance {
+public class Balance implements Printable {
     /**
      * A variable that stores funds on the client's {@link Card}.
      */
@@ -62,6 +64,11 @@ public class Balance {
 
     @Override
     public String toString() {
-        return String.format("Balance: %d%n", balance);
+        return String.valueOf(balance);
+    }
+
+    @Override
+    public void printToConsole() {
+        System.out.println(String.format("Balance: %d%n", balance));
     }
 }
