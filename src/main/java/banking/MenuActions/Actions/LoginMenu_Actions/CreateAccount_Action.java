@@ -1,6 +1,7 @@
 package banking.MenuActions.Actions.LoginMenu_Actions;
 
 import banking.MenuActions.Actions.Action;
+import banking.MenuActions.Controller;
 import banking.MenuActions.Recivers.LoginMenu;
 
 public class CreateAccount_Action extends Action {
@@ -13,8 +14,9 @@ public class CreateAccount_Action extends Action {
         this.loginMenu = loginMenu;
     }
 
+
     @Override
-    public void execute() {
+    public void execute(Controller controller) {
         loginMenu.createAccount();
     }
 }

@@ -1,5 +1,6 @@
 package banking.MenuActions.Actions;
 
+import banking.MenuActions.Controller;
 import banking.MenuActions.Recivers.ShouldBeExit;
 
 public class Exit_Action extends Action {
@@ -14,7 +15,7 @@ public class Exit_Action extends Action {
 
 
     @Override
-    public void execute() {
+    public void execute(Controller controller) {
         menu.exit();
     }
 }

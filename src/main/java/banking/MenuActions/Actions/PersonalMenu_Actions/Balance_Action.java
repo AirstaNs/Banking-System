@@ -2,6 +2,7 @@ package banking.MenuActions.Actions.PersonalMenu_Actions;
 
 
 import banking.MenuActions.Actions.Action;
+import banking.MenuActions.Controller;
 import banking.MenuActions.Recivers.PersonalMenu;
 
 public class Balance_Action extends Action {
@@ -16,7 +17,7 @@ public class Balance_Action extends Action {
     }
 
     @Override
-    public void execute() {
+    public void execute(Controller controller) {
         personalMenu.balance();
     }
 }

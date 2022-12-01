@@ -1,5 +1,7 @@
 package banking.MenuActions.Actions;
 
+import banking.MenuActions.Controller;
+
 // COMMAND
 public abstract class Action {
     private final String title;
@@ -10,7 +12,7 @@ public abstract class Action {
         this.numberItem = numberItem;
     }
 
-    public abstract void execute();
+    public abstract void execute(Controller controller);
 
 
     public String getTitle() {
