@@ -24,7 +24,7 @@ public class BankSystem {
     /**
      * Displays all items on the page.
      */
-    public static Controller controller;
+    private static Controller controller;
     /**
      * The initialization page is available without logging in. A specific menu item and page
      */
@@ -42,7 +42,7 @@ public class BankSystem {
     public void start(String nameDB) {
         initSystem(nameDB);
 
-        controller.setPage(Page.welcomePage(loginMenu, personalMenu));
+        controller.setPage(Page.welcomePage(loginMenu));
 
 
         while (isWork) {
@@ -72,7 +72,11 @@ public class BankSystem {
      */
     private void menu(Controller controller) {
         controller.printPage();
-        controller.executeCommand(new Scanner(java.lang.System.in).nextInt());
+        try {
+            controller.executeCommand(new Scanner(java.lang.System.in).nextInt());
+        } catch (RuntimeException e) {
+            System.out.println("Wrong action\n");
+        }
     }
 
 }
