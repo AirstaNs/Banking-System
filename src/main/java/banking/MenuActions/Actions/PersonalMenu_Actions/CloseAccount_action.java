@@ -1,6 +1,8 @@
 package banking.MenuActions.Actions.PersonalMenu_Actions;
 
+import banking.DAO.Context;
 import banking.MenuActions.Actions.Action;
+import banking.MenuActions.Controller;
 import banking.MenuActions.Recivers.PersonalMenu;
 
 public class CloseAccount_action extends Action {
@@ -14,7 +16,9 @@ public class CloseAccount_action extends Action {
     }
 
     @Override
-    public void execute() {
-        personalMenu.closeAccount();
+    public void execute(Controller controller) {
+        Context context = controller.getContext();
+        boolean isRemove = context.removeUser(controller.getUser());
+        personalMenu.closeAccount(isRemove);
     }
 }

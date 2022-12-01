@@ -1,6 +1,7 @@
 package banking.MenuActions.Recivers;
 
-import banking.Card.AlgorithmLuna;
+
+import banking.DAO.Context;
 import banking.MenuActions.Controller;
 import banking.MenuActions.BankSystem;
 import banking.MenuActions.Page;
@@ -17,10 +18,6 @@ import java.util.Scanner;
  */
 public class PersonalMenu implements ShouldBeExit {
     /**
-     * Personal account of users, detection action for it.
-     */
-    private User user;
-    /**
      * Needed to change the displayed page in the console
      */
     private final Controller controller;
@@ -29,65 +26,38 @@ public class PersonalMenu implements ShouldBeExit {
         this.controller = controller;
     }
 
-    /**
-     * Set the user for this page.
-     *
-     * @param user Personal account of users, detection action for it.
-     */
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     /**
      * Action to display the balance on the console for a specific user
      */
     public void balance() {
-        System.out.println(user.Card().Balance());
+        controller.getUser().Card().Balance().printToConsole();
     }
 
     public void addIncome() { //TODO
         Message.ADD_INCOME_INPUT.printToConsole();
         try {
             long amount = new Scanner(System.in).nextLong();
+            User user = controller.getUser();
+
             user.Card().Balance().deposit(amount);
             controller.getContext().updateBalance(user);
+
             Message.ADD_INCOME_SUCCESSFULLY.printToConsole();
         } catch (RuntimeException e) {
             Message.ERROR_ADD_INCOME_FAILED.printToConsole();
         }
     }
 
-    public void transfer() { //TOD
-        Scanner scanner = new Scanner(System.in);
-        Message.TRANSFER_ENTER_CARD.printToConsole();
-        String toNumberCard = scanner.next();
-
-        if (user.Card().getNumber().equals(toNumberCard)) {
-            Message.ERROR_TRANSFER_TO_YOURSELF.printToConsole();
-            return;
-        } else if (!new AlgorithmLuna(toNumberCard).isFormattedLuna()) {
-            Message.ERROR_TRANSFER_CARD_NUMBER_NOT_LUNA.printToConsole();
-            return;
-        } else if (!controller.getContext().containsUser(toNumberCard)) {
-            Message.ERROR_TRANSFER_CARD_NOT_EXIST.printToConsole();
-            return;
-        }
-
-        Message.TRANSFER_ENTER_AMOUNT.printToConsole();
-        long amount = scanner.nextLong();
-        if (user.Card().Balance().getBalance() < amount) {
-            Message.ERROR_TRANSFER_NOT_MONEY.printToConsole();
-            return;
-        }
-        controller.getContext().transfer(user, toNumberCard, amount);
+    public void transfer(User user, Context context, String toNumberCard, long amount) { //TOD
+        context.transfer(user, toNumberCard, amount);
     }
 
-    public void closeAccount() { //TODO
-        boolean isRemove = controller.getContext().removeUser(user);
+    public void closeAccount(boolean isRemove) { //TODO
         if (isRemove) {
             Message.CLOSE_ACCOUNT.printToConsole();
-            user = null;
-            controller.setPage(Page.welcomePage(BankSystem.loginMenu, BankSystem.personalMenu));
+            controller.setUser(null);
+            controller.setPage(Page.welcomePage(BankSystem.loginMenu));
         } else {
             throw new RuntimeException("Аккаунт не закрылся");
         }
@@ -99,8 +69,8 @@ public class PersonalMenu implements ShouldBeExit {
      */
     public void LogOut() {
         Message.LOG_OUT.printToConsole();
-        user = null;
-        controller.setPage(Page.welcomePage(BankSystem.loginMenu, BankSystem.personalMenu));
+        controller.setUser(null);
+        controller.setPage(Page.welcomePage(BankSystem.loginMenu));
     }
 
     private enum Message implements Printable {
@@ -108,12 +78,6 @@ public class PersonalMenu implements ShouldBeExit {
         ADD_INCOME_INPUT("Enter income:"),
         ADD_INCOME_SUCCESSFULLY("Income was added!\n"),
         ERROR_ADD_INCOME_FAILED("Amount less than zero\n"),
-        TRANSFER_ENTER_CARD("Transfer\n" + "Enter card number:"),
-        TRANSFER_ENTER_AMOUNT("Enter how much money you want to transfer:"),
-        ERROR_TRANSFER_NOT_MONEY("Not enough money!\n"),
-        ERROR_TRANSFER_TO_YOURSELF("You can't transfer money to the same account!\n"),
-        ERROR_TRANSFER_CARD_NUMBER_NOT_LUNA("Probably you made a mistake in the card number. Please try again!\n"),
-        ERROR_TRANSFER_CARD_NOT_EXIST("Such a card does not exist."),
         CLOSE_ACCOUNT("The account has been closed!\n");
         private final String message;
 
