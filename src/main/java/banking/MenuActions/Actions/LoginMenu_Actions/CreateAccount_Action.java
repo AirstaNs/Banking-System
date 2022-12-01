@@ -17,6 +17,6 @@ public class CreateAccount_Action extends Action {
 
     @Override
     public void execute(Controller controller) {
-        loginMenu.createAccount();
+        loginMenu.createAccount(controller);
     }
 }

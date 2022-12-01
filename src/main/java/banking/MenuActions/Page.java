@@ -15,15 +15,14 @@ import java.util.List;
  */
 public class Page {
     /**
-     * @param loginMenu    {@link LoginMenu}
-     * @param personalMenu {@link PersonalMenu}
+     * @param loginMenu {@link LoginMenu}
      * @return Returns "Page" - a list of home page menu actions.
      */
-    public static List<Action> welcomePage(LoginMenu loginMenu, PersonalMenu personalMenu) {
+    public static List<Action> welcomePage(LoginMenu loginMenu) {
         return new ArrayList<>() {{
             add(new Exit_Action(this.size(), loginMenu));
             add(new CreateAccount_Action(this.size(), loginMenu));
-            add(new LogInAccount_Action(this.size(), loginMenu, personalMenu));
+            add(new LogInAccount_Action(this.size(), loginMenu));
         }};
     }
 

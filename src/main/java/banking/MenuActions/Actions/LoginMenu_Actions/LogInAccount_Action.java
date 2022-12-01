@@ -19,6 +19,6 @@ public class LogInAccount_Action extends Action {
 
     @Override
     public void execute(Controller controller) {
-        loginMenu.LogInAccount();
+        loginMenu.LogInAccount(controller);
     }
 }
