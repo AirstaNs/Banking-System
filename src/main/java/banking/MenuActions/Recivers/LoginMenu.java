@@ -18,14 +18,8 @@ import static banking.MenuActions.Recivers.LoginMenu.Message.*;
  */
 
 public class LoginMenu implements ShouldBeExit {
-    /**
-     * Needed to change the displayed page in the console
-     */
-    private Controller controller;
 
-    public LoginMenu(Controller controller) {
-        this.controller = controller;
-    }
+
 
     /**
      * Account creation action. <br>
@@ -33,7 +27,7 @@ public class LoginMenu implements ShouldBeExit {
      * Adds to Context - "database". <br>
      * Writes the user's card data to the console.
      */
-    public void createAccount() {
+    public void createAccount(Controller controller) {
         var user = new User();
         controller.getContext().addUser(user);
         user.printToConsole();
@@ -45,20 +39,18 @@ public class LoginMenu implements ShouldBeExit {
      * Takes from the context of the User. <br>
      * If the data is incorrect - DOES NOT redirect to the page of the Personal Account. <br>
      * if correct, redirects to the page of the Personal Account
-     *
-     * @param personalMenu
      */
-    public void LogInAccount(PersonalMenu personalMenu) {
-        var optionalUser = initialUserFromConsole();
+    public void LogInAccount(Controller controller) {
+        var optionalUser = initialUserFromConsole(controller);
 
         optionalUser.ifPresentOrElse((person) -> {
-            personalMenu.setUser(person);
+            controller.setUser(person);
             SUCCESSFUL_LOGIN.printToConsole();
             controller.setPage(Page.personalPage(BankSystem.personalMenu));
         }, FAILED_LOGIN::printToConsole);
     }
 
-    private Optional<User> initialUserFromConsole() {
+    private Optional<User> initialUserFromConsole(Controller controller) {
         INPUT_CARD.printToConsole();
         Scanner scanner = new Scanner(System.in);
         String number = scanner.next();
